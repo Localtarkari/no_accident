@@ -20,9 +20,10 @@ const logout = (req, resp, next) => {
 
 
 const authenticate_authorize = (req, resp, next) => {
+  console.log(req.body.password)
   User.findOne({ name: req.body.email }).then((user) => {
     if (user) {
-      user.validation(req.body.password).then((passwordMatch) => {
+      user.validation((req.body.password).toString()).then((passwordMatch) => {
         if (passwordMatch) {
           req.session.user = user.id;
           resp.redirect("/");
@@ -40,12 +41,7 @@ const signup = (req, resp, next) => {
   resp.render("signup", { error: "" });
 };
 
-/**
- * 
- * @param {request object} req 
- * @param {response object} resp 
- * @param {next object} next 
- */
+
 const register = (req, resp, next) => {
   const newUser = new User({
     firstname: req.body.firstname,

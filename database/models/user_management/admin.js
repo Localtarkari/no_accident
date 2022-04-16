@@ -1,9 +1,8 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const userSchema = new mongoose.Schema(
+const adminSchema = new mongoose.Schema(
   {
-    firstname: String,
-    lastname: String,
+    username: String,
     password: String,
     phonenumber: {
       type: String,
@@ -18,9 +17,7 @@ const userSchema = new mongoose.Schema(
 );
 
 userSchema.pre("save", function (next) {
-
   let user = this;
-  console.log('aa    ',this.password,"  aaa")
   bcrypt
     .hash(user.password, 10)
     .then((hash) => {
@@ -32,9 +29,8 @@ userSchema.pre("save", function (next) {
       next(err);
     });
 });
-userSchema.methods.validation = async function (inputPassword) { 
-  // let pass= '"'+inputPassword+'"';
- return await bcrypt.compare(inputPassword,this.password);
+userSchema.methods.validation = async function (inputPassword) {
+  return await bcrypt.compare(inputPassword, this.password);
 };
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("Admin", adminchema);
