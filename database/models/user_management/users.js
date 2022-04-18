@@ -13,14 +13,19 @@ const userSchema = new mongoose.Schema(
       type: String,
       unique: true,
     },
+    user_type: {
+      type: String,
+      enum: ["admin", "user","police", "guest"],
+      default: "user",
+    },
   },
+
   { timestamps: true }
 );
 
 userSchema.pre("save", function (next) {
-
   let user = this;
-  console.log('aa    ',this.password,"  aaa")
+  console.log("aa    ", this.password, "  aaa");
   bcrypt
     .hash(user.password, 10)
     .then((hash) => {
@@ -32,9 +37,9 @@ userSchema.pre("save", function (next) {
       next(err);
     });
 });
-userSchema.methods.validation = async function (inputPassword) { 
+userSchema.methods.validation = async function (inputPassword) {
   // let pass= '"'+inputPassword+'"';
- return await bcrypt.compare(inputPassword,this.password);
+  return await bcrypt.compare(inputPassword, this.password);
 };
 
 module.exports = mongoose.model("User", userSchema);

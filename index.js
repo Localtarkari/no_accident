@@ -5,7 +5,7 @@ const app = express();
 const router = require("./routes/web");
 
 app.set("view engine", "ejs");
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 
 app.use(express.urlencoded({ extended: false })); //parse url encoded data
 app.use(express.json()); //parse json encoded data\
@@ -24,7 +24,7 @@ app.use(
   })
 );
 
-/** SESSION CONFIG DONE */
+
 app.use("", router);
 
 app.listen(port, (err) => {
