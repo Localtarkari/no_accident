@@ -5,6 +5,10 @@ const userSchema = new mongoose.Schema(
     firstname: String,
     lastname: String,
     password: String,
+    username:{
+      type: String,
+      default: ''
+    },
     phonenumber: {
       type: String,
       unique: true,
@@ -18,6 +22,23 @@ const userSchema = new mongoose.Schema(
       enum: ["admin", "user","police", "guest"],
       default: "user",
     },
+    address:{
+      type: String,
+      default:'NON'
+    },
+    city:{
+      type: String,
+      default:'NON'
+    },
+    country:{
+      type: String,
+      default:'NON'
+    },
+    profile:{
+      type: String,
+      default:'NON'
+    }
+
   },
 
   { timestamps: true }

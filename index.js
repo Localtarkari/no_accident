@@ -2,8 +2,8 @@ const express = require("express");
 const expressSession = require("express-session");
 const layouts = require('express-ejs-layouts');
 const app = express();
-
 const router = require("./routes/web");
+const router2 = require("./routes/package");
 
 app.set("view engine", "ejs");
 const port = process.env.PORT || 4000;
@@ -21,15 +21,13 @@ app.use(
     resave: true,
     cookie: {
       secure: false,
-      maxAge: 60000,
-    },
+     },
     saveUninitialized: true,
   })
 );
 
-
 app.use("", router);
-
+app.use("/package", router2);
 app.listen(port, (err) => {
   if (err) {
     console.log("err", err);
