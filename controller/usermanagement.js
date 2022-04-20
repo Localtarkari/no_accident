@@ -5,11 +5,11 @@ const index = (req, resp, next) => {
 
   //   resp.render("dashboard",{user:req.session.user});
   // }
-  resp.render("index", { name: "index" });
+  resp.render("guest/index", {layout:'layouta', name: "index" });
 };
 
 const login = (req, resp, next) => {
-  resp.render("login");
+  resp.render("guest/login",{layout:'layouta'});
 };
 
 const logout = (req, resp, next) => {
@@ -39,7 +39,7 @@ const authenticate_authorize = (req, resp, next) => {
 };
 
 const signup = (req, resp, next) => {
-  resp.render("signup", { error: "" });
+  resp.render("guest/signup", {layout:'layouta', error: "" });
 };
 
 
@@ -59,12 +59,26 @@ const register = (req, resp, next) => {
 };
 
 const profile = (req,resp,next)=>{
- resp.render('profile',{user:req.session.user})
+ resp.render('user/profile',{layout:'layoutb',user:req.session.user})
 }
 
 const user = (req,resp,next)=>{
-  resp.render('table')
+  resp.render('user/table',{layout:'layoutb',user:req.session.user})
 }
+
+const guides =(req,resp,next)=>{
+  resp.send('user/guides',{layout:'layoutb',user:req.session.user})
+}
+
+const packages = (req,resp,next)=>{
+  resp.render('user/available_packages',{layout:'layoutb',user:req.session.user});
+}
+
+const apply_for_device = (req,resp,next)=>{
+  resp.render('user/vehicle_apply',{layout:'layoutb',user:req.session.user});
+}
+
+
 module.exports = {
   index,
   login,
@@ -73,5 +87,8 @@ module.exports = {
   authenticate_authorize,
   logout,
   profile,
-  user
+  user,
+  guides,
+  packages,
+  apply_for_device
 };

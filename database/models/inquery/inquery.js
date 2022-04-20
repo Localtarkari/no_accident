@@ -1,20 +1,22 @@
 const mongoose = require("mongoose");
-const speedVoilationSchema = new mongoose.Schema(
+const inquerySchema = new mongoose.Schema(
   {
-    vehicle: [
+    user: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Vehicle",
       },
     ],
-    speed:{
+    name:{
         type:String
     },
-    time_stamp: {
-      type: Date,
-      default: Date.now,
+    contact: {
+      type: String,
     },
-    device_id:{
+    details:{
+        type: String,
+    },
+    package_id:{
         type:String,
         unique: true
     }
@@ -22,4 +24,4 @@ const speedVoilationSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("SpeedVoilation", speedVoilationSchema);
+module.exports = mongoose.model("Inquery", accelerometerSchema);

@@ -1,5 +1,6 @@
 const express = require("express");
 const expressSession = require("express-session");
+const layouts = require('express-ejs-layouts');
 const app = express();
 
 const router = require("./routes/web");
@@ -10,6 +11,8 @@ const port = process.env.PORT || 4000;
 app.use(express.urlencoded({ extended: false })); //parse url encoded data
 app.use(express.json()); //parse json encoded data\
 app.use(express.static("public"));
+app.use(layouts);
+app.set('layoout','layouta','layoutb')
 
 /** Working with session */
 app.use(
