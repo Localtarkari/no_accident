@@ -1,5 +1,5 @@
 
-<body id="page-top">
+<body id="page-top" >
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
                      
@@ -18,73 +18,28 @@
                                             <th>Report</th>
                                             <th>Signed Up</th>
                                             <th>Status</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <%for(let i=0;i<data.length;i++){%>
+                                          
                                         <tr>
-                                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar1.jpeg">Airi Satou</td>
+                                            
+                                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar1.jpeg"><%=data[i].firstname %> <%=data[i].lastname %></td>
                                             <td>BA NA 2002</td>
                                             <td>Tokyo</td>
                                             <td>33</td>
                                             <td>2008/11/28</td>
                                             <td><i class="fa fa-circle" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="bottom" style="color: rgb(26,254,6);" title="online"></i><i class="fa fa-circle" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="bottom" style="color: rgb(0,0,0);border-color: rgb(0,0,0);" title="offline"></i><i class="fa fa-circle" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="bottom" style="color: rgb(255,0,0);border-color: rgb(0,0,0);" title="error"></i></td>
+                                            <td>
+                                                <a href="/#">
+                                                <i class="fa fa-eye" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="bottom" style="color: rgb(255, 0, 0);" title="View Details"></i>
+                                            </a>
                                         </tr>
-                                        <tr>
-                                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar2.jpeg">Angelica Ramos</td>
-                                            <td><a class="btn btn-primary btn-sm btn-icon-split" role="button"><span class="text-white-50 icon"><i class="fas fa-flag"></i></span><span class="text-white text">View Application</span></a></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td><br></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar2.jpeg">Angelica Ramos</td>
-                                            <td><a class="btn btn-primary btn-sm btn-icon-split" role="button"><span class="text-white-50 icon"><i class="fas fa-flag"></i></span><span class="text-white text">View Application</span></a></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td><br></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar2.jpeg">Angelica Ramos</td>
-                                            <td><a class="btn btn-primary btn-sm btn-icon-split" role="button"><span class="text-white-50 icon"><i class="fas fa-flag"></i></span><span class="text-white text">View Application</span></a></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td><br></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar2.jpeg">Angelica Ramos</td>
-                                            <td><a class="btn btn-primary btn-sm btn-icon-split" role="button"><span class="text-white-50 icon"><i class="fas fa-flag"></i></span><span class="text-white text">View Application</span></a></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td><br></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar2.jpeg">Angelica Ramos</td>
-                                            <td><a class="btn btn-primary btn-sm btn-icon-split" role="button"><span class="text-white-50 icon"><i class="fas fa-flag"></i></span><span class="text-white text">View Application</span></a></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td><br></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar2.jpeg">Angelica Ramos</td>
-                                            <td><a class="btn btn-primary btn-sm btn-icon-split" role="button"><span class="text-white-50 icon"><i class="fas fa-flag"></i></span><span class="text-white text">View Application</span></a></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td><br></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar2.jpeg">Angelica Ramos</td>
-                                            <td><a class="btn btn-primary btn-sm btn-icon-split" role="button"><span class="text-white-50 icon"><i class="fas fa-flag"></i></span><span class="text-white text">View Application</span></a></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td><br></td>
-                                            <td></td>
-                                        </tr>
+
+                                        
+                                      <%}%>
                                     </tbody>
                                 </table>
                             </div>

@@ -1,96 +1,121 @@
 <body id="page-top">
-   <div class="d-flex flex-column" id="content-wrapper">
-            <div id="content" style="border-color: rgb(255,255,255);">
-                <div class="container py-4 py-xl-5" style="padding: 0px;margin-left: 16px;">
-                    <!-- Start: Split Button Primary --><a class="btn btn-primary btn-icon-split" role="button"><span class="text-white-50 icon"><i class="fas fa-redo"></i></span><span class="text-white text">Available Packages</span></a><!-- End: Split Button Primary -->
-                    <!-- Start: Split Button Primary --><a class="btn btn-primary btn-icon-split" role="button" data-bs-target="#modal-1" data-bs-toggle="modal"><span class="text-white-50 icon"><i class="fas fa-plus"></i></span><span class="text-white text">Add Packages</span></a><!-- End: Split Button Primary -->
-                    <div class="row row-cols-2 row-cols-md-2 row-cols-xl-3 d-xl-flex">
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content" style="border-color: rgb(255,255,255);">
+            <div class="container py-4 py-xl-5" style="padding: 0px;margin-left: 16px;">
+                <!-- Start: Split Button Primary --><a class="btn btn-primary btn-icon-split" role="button"><span
+                        class="text-white-50 content-wrappericon"><i class="fas fa-redo"></i></span><span
+                        class="text-white text">Available Packages</span></a><!-- End: Split Button Primary -->
+                <!-- Start: Split Button Primary -->
+                <a class="btn btn-primary btn-icon-split" role="button"
+                    data-bs-target="#modal-1" data-bs-toggle="modal"><span class="text-white-50 icon"><i
+                            class="fas fa-plus"></i></span><span class="text-white text">Add Packages</span></a>
+                <!-- End: Split Button Primary -->
+                <div class="row row-cols-2 row-cols-md-2 row-cols-xl-3 d-xl-flex">
+
+                    <% for(let i=0;i<package.length;i++){%>
                         <div class="col">
-                            <div class="p-4" style="width: 408px;"><span class="badge rounded-pill bg-primary mb-2">no_accident_001</span>
-                                <h4 style="color: rgb(16,16,16);">NO ACCIDENT 001&nbsp;</h4>
-                                <p>First prototype build&nbsp; to prevent accident</p>
+                            <div class="p-4" style="width: 408px;"><span class="badge rounded-pill bg-primary mb-2">
+                                    <%= package[i]['_id']%>
+                                </span>
+                                <h4 style="color: rgb(16,16,16);">
+                                    <%= package[i]['package_name']%>
+                                </h4>
+                                <p>
+                                    <%= package[i]['package_description']%>
+                                </p>
                                 <h4 style="color: rgb(0,0,0);font-size: 21px;">Features</h4>
                                 <ul>
-                                    <li>Speed control</li>
-                                    <li>Temperature&nbsp;</li>
-                                    <li>Rotation Pitch and Roll&nbsp; control</li>
-                                    <li>Real-time 3D visualization</li>
+                                    <%let features=package[i]['package_features']%>
+                                        <% for(let j=0;j<features.length;j++){%>
+                                            <li>
+                                                <%= features[j]%>
+                                            </li>
+                                            <%}%>
+
                                 </ul>
                                 <div class="d-flex">
                                     <div style="width: fit-content;">
-                                        <!-- Start: Split Button Primary --><a class="btn btn-success btn-sm btn-icon-split" role="button"><span class="text-white-50 icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M9 5L16 12L9 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg></span><span class="text-white text">Apply to install</span></a><!-- End: Split Button Primary -->
+                                        <!-- Start: Split Button Primary -->
+                                        <a href="/apply"
+                                            class="btn btn-success btn-sm btn-icon-split" role="button"><span
+                                                class="text-white-50 icon"><svg xmlns="http://www.w3.org/2000/svg"
+                                                    width="1em" height="1em" viewBox="0 0 24 24" fill="none">
+                                                    <path d="M9 5L16 12L9 19" stroke="currentColor" stroke-width="2"
+                                                        stroke-linecap="round" stroke-linejoin="round"></path>
+                                                </svg></span><span class="text-white text">Apply to install</span>
+                                            
+                                            </a>
+                                        <!-- End: Split Button Primary -->
                                     </div>
                                     <div style="width: fit-content;">
-                                        <!-- Start: Split Button Primary --><a class="btn btn-sm btn-icon-split" role="button" style="background: rgb(205,35,24);"><span class="text-white-50 icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M9 5L16 12L9 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg></span><span class="text-white text">Edit</span></a><!-- End: Split Button Primary -->
+                                        <!-- Start: Split Button Primary --><a  href="<%= `edit/${package[i]['_id']}` %>" class="btn btn-sm btn-icon-split" 
+                                            role="button" style="background: rgb(205,35,24);"><span
+                                                class="text-white-50 icon"><svg xmlns="http://www.w3.org/2000/svg"
+                                                    width="1em" height="1em" viewBox="0 0 24 24" fill="none">
+                                                    <path d="M9 5L16 12L9 19" stroke="currentColor" stroke-width="2"
+                                                        stroke-linecap="round" stroke-linejoin="round"></path>
+                                                </svg></span><span class="text-white text">Edit</span></a>
+                                        <!-- End: Split Button Primary -->
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="p-4" style="width: 408px;"><span class="badge rounded-pill bg-primary mb-2">no_accident_001</span>
-                                <h4 style="color: rgb(16,16,16);">NO ACCIDENT 001&nbsp;</h4>
-                                <p>First prototype build&nbsp; to prevent accident</p>
-                                <h4 style="color: rgb(0,0,0);font-size: 21px;">Features</h4>
-                                <ul>
-                                    <li>Speed control</li>
-                                    <li>Temperature&nbsp;</li>
-                                    <li>Rotation Pitch and Roll&nbsp; control</li>
-                                    <li>Real-time 3D visualization</li>
-                                </ul>
-                                <div class="d-flex">
-                                    <div style="width: fit-content;">
-                                        <!-- Start: Split Button Primary --><a class="btn btn-success btn-sm btn-icon-split" role="button"><span class="text-white-50 icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M9 5L16 12L9 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg></span><span class="text-white text">Apply to install</span></a><!-- End: Split Button Primary -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="p-4" style="width: 408px;"><span class="badge rounded-pill bg-primary mb-2">no_accident_001</span>
-                                <h4 style="color: rgb(16,16,16);">NO ACCIDENT 001&nbsp;</h4>
-                                <p>First prototype build&nbsp; to prevent accident</p>
-                                <h4 style="color: rgb(0,0,0);font-size: 21px;">Features</h4>
-                                <ul>
-                                    <li>Speed control</li>
-                                    <li>Temperature&nbsp;</li>
-                                    <li>Rotation Pitch and Roll&nbsp; control</li>
-                                    <li>Real-time 3D visualization</li>
-                                </ul>
-                                <div class="d-flex">
-                                    <div style="width: fit-content;">
-                                        <!-- Start: Split Button Primary --><a class="btn btn-success btn-sm btn-icon-split" role="button"><span class="text-white-50 icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M9 5L16 12L9 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg></span><span class="text-white text">Apply to install</span></a><!-- End: Split Button Primary -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- End: Articles Badges -->
-            </div>
+
+
+                 <%}%>
+
+
+
+
+
+                </div>
+            </div><!-- End: Articles Badges -->
         </div>
     </div>
+    </div>
+
     <div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header border rounded-0">
-                    <h4 class="modal-title">Add Package</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h4 class="modal-title">Add Package</h4><button type="button" class="btn-close"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body border rounded-0">
-                    <form><input class="border rounded-0 form-control" type="text" name="package_name" placeholder="Package Name" style="margin-bottom: 8px;height: 49px;"><input class="border rounded-0 form-control" type="text" name="Description" placeholder="Description" style="margin-bottom: 8px;height: 49px;"><input class="border rounded-0 form-control" type="text" name="Features" placeholder="Feature" style="margin-bottom: 8px;height: 49px;"></form>
-                    <div class="d-xl-flex justify-content-xl-center" style="font-size: 13px;">
-                        <!-- Start: Split Button Success --><a class="btn btn-success btn-sm btn-icon-split" role="button"><span class="text-white-50 icon"><i class="fas fa-plus"></i></span><span class="text-white text">Add Feature</span></a><!-- End: Split Button Success -->
+                <form action="<%=`/package/update/${user['_id']}`%>" method="post">
+                    <div class="modal-body border rounded-0">
+
+                        <input class="border rounded-0 form-control" type="text" name="name" placeholder="Package Name"
+                            style="margin-bottom: 8px;height: 49px;">
+                        <input class="border rounded-0 form-control" type="text" name="description"
+                            placeholder="Description" style="margin-bottom: 8px;height: 49px;">
+                        <input class="border rounded-0 form-control" type="text" name="features" placeholder="Feature"
+                            style="margin-bottom: 8px;height: 49px;">
+                        <input class="border rounded-0 form-control" type="text" name="features" placeholder="Feature"
+                            style="margin-bottom: 8px;height: 49px;">
+                        <input class="border rounded-0 form-control" type="text" name="features" placeholder="Feature"
+                            style="margin-bottom: 8px;height: 49px;">
+
+                        <div class="d-xl-flex justify-content-xl-center" style="font-size: 13px;">
+                            <!-- Start: Split Button Success -->
+                            <a class="btn btn-success btn-sm btn-icon-split" role="button">
+                                <span class="text-white-50 icon"><i class="fas fa-plus"></i></span>
+                                <span class="text-white text">Add Feature</span></a><!-- End: Split Button Success -->
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer"><button class="btn btn-light btn-sm" type="button" style="font-family: Poppins, sans-serif;">Add</button></div>
+                    <div class="modal-footer">
+                        <button class="btn btn-light btn-sm" type="submit"
+                            style="font-family: Poppins, sans-serif;">Add</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+
+
+       
+    
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
     <script src="assets/js/theme.js"></script>

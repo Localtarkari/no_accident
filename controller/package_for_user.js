@@ -1,22 +1,36 @@
 const { request } = require('express');
 const Package = require('../database/models/package/package');
 const User = require('../database/models/user_management/users');
+const PackageRequest = require('../database/models/package/request_for_package');
 
 
 let get_package = (req,resp)=>{
-    Package.find({},(data,err)=>{
+    Package.find({},(err,data)=>{
+        if(err) {
+        resp.render("user/available_packages", {
+        layout: "layoutb",
+        user: req.session.user,
+        package: null
+      });
+    }else{
         console.log(data)
-        resp.send("ok ")
+            resp.render("user/available_packages", {
+                layout: "layoutb",
+                user: req.session.user,
+                package: data
+              });  
+        }
     })  
+
 }
 
 
-let add_package = (req,resp)=>{
-
-
-User.findOne({_id:req.body.user_id}).then((data)=>{
+let add_package = (req,resp,next)=>{
+   
+User.findOne({_id:req.params.id}).then((data)=>{
     const pack = new Package({
         package_name:req.body.name,
+        package_description: req.body.description,
         package_features: req.body.features,
         added_by: data
     })
@@ -26,7 +40,7 @@ User.findOne({_id:req.body.user_id}).then((data)=>{
         }
         else{
             console.log('done')
-            resp.redirect('/')
+            resp.redirect('/package')
         }
     })
 
@@ -36,18 +50,39 @@ User.findOne({_id:req.body.user_id}).then((data)=>{
 
 }
 
-let update_package = (req,resp)=>{
+let update_package = (req,resp,next)=>{
    Package.findByIdAndUpdate(req.params.id,{
        package_name: req.body.name,
        package_features: req.body.features,
      }).then((data)=> resp.redirect("/"))
 }
 
-let delete_package = (req,resp)=>{
+let delete_package = (req,resp,next)=>{
 
 }
 
 
+let apply_for_Package = (req,resp,next)=>{
+    User.findOne({_id:req.params.id}).then((data)=>{
+    let newRequest = new PackageRequest({
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        vehicle_number: req.body.vehicle_number,
+        vehicle_type: req.body.vehicle_type,
+        requested_by:  data,
+      });
+      newRequest.save((err, data) => {
+        if (err) console.log("la la ", err);
+        resp.redirect("/");
+      });
 
+    }).then((err)=>{
+        console.log(err)
+    });
+}   
 
-module.exports = {get_package,add_package,update_package}
+let edit_package = (req,resp,next)=>{
+   resp.send(req.params.id)
+}
+
+module.exports = {get_package,add_package,update_package,edit_package,apply_for_Package}

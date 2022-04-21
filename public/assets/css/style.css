@@ -6,3 +6,7 @@ a {
   bottom: 0px;
 }
 
+#content-wrapper{
+  margin-top: 10px;
+  background-color: white !important;
+}

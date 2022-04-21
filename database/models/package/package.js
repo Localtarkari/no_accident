@@ -5,6 +5,9 @@ const packageSchema = mongoose.Schema({
         type: String,
     
     },
+    package_description:{
+        type: String
+    },
     package_features:[{
         type: String,
         

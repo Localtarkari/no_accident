@@ -8,9 +8,13 @@ let index = (req, resp, next) => {
   resp.render("guest/index", { layout: "layouta", name: "index" });
 };
 
+
+
 let login = (req, resp, next) => {
   resp.render("guest/login", { layout: "layouta" });
 };
+
+
 
 let logout = (req, resp, next) => {
   req.session.destroy((err) => {
@@ -18,6 +22,8 @@ let logout = (req, resp, next) => {
   });
   resp.redirect("/");
 };
+
+
 
 let authenticate_authorize = (req, resp, next) => {
   User.findOne({ name: req.body.email }).then((user) => {
@@ -55,20 +61,28 @@ let register = (req, resp, next) => {
   });
 };
 
+
 let user = (req, resp, next) => {
-  resp.render("user/table", { layout: "layoutb", user: req.session.user });
+  let users = User.find({},(err,data)=>{
+      if(err){
+        resp.render("user/table", { layout: "layoutb", user: req.session.user });
+      }else{
+  resp.render("user/table", { layout: "layoutb", user: req.session.user ,data: data});
+
+      }
+  })
 };
+
 
 let guides = (req, resp, next) => {
   resp.send("user/guides", { layout: "layoutb", user: req.session.user });
 };
 
+
 let packages = (req, resp, next) => {
-  resp.render("user/available_packages", {
-    layout: "layoutb",
-    user: req.session.user,
-  });
+ 
 };
+
 
 let apply_for_device = (req, resp, next) => {
   resp.render("user/vehicle_apply", {
@@ -77,8 +91,8 @@ let apply_for_device = (req, resp, next) => {
   });
 };
 
-let profile = (req, resp, next) => {
 
+let profile = (req, resp, next) => {
   User.findById(req.session.user["_id"])
     .then((user) => {
       console.log(user.username)
@@ -89,8 +103,10 @@ let profile = (req, resp, next) => {
     });
 };
 
+
 //UPDATE DATABASE
 let update_profile = (req, resp, next) => {
+
   User.findByIdAndUpdate(req.params.id, {
     firstname: req.body.firstname,
     lastname: req.body.lastname,
@@ -101,7 +117,7 @@ let update_profile = (req, resp, next) => {
 };
 
 let update_user_contact = (req, resp, next) => {
-  console.log(req.params);
+
   User.findByIdAndUpdate(req.params.id, {
     address: req.body.address,
     country: req.body.country,
@@ -111,11 +127,12 @@ let update_user_contact = (req, resp, next) => {
   };
 
   let change_profile_pic = (req,resp,next)=>{
-    console.log(req.params);
-    User.findByIdAndUpdate(req.params.id, {
+   User.findByIdAndUpdate(req.params.id, {
       profile: req.files[0]['filename']
       })
-      .then((data) => resp.redirect("/profile"))
+      .then((data) => {
+      //have to
+      resp.redirect("/profile")})
   };
 
 module.exports = {
