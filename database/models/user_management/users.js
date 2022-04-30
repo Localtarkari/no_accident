@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema(
     email: {
       type: String,
       unique: 'email already exist',
-      match: [ /. +\@. +\.. + /, 'Please give a valid email address' ]
+      // match: [ /. +\@. +\.. + /, 'Please give a valid email address' ]
     },
     user_type: {
       type: String,
@@ -48,7 +48,6 @@ const userSchema = new mongoose.Schema(
 
 userSchema.pre("save", function (next) {
   let user = this;
-  console.log("aa    ", this.password, "  aaa");
   bcrypt
     .hash(user.password, 10)
     .then((hash) => {
