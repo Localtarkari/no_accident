@@ -47,6 +47,7 @@ let signup = (req, resp, next) => {
 };
 
 let register = (req, resp, next) => {
+  console.log(req.body)
   let newUser = new User({
     firstname: req.body.firstname,
     lastname: req.body.lastname,
@@ -55,7 +56,10 @@ let register = (req, resp, next) => {
     phonenumber: req.body.number,
   });
   newUser.save((err, data) => {
-    if (err) console.log("la la ", err);
+    if (err){ 
+      console.log("la la ", err)
+      resp.redirect("/");
+  };
     req.session.user = data;
     resp.redirect("/");
   });

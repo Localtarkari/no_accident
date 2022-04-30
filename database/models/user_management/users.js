@@ -16,7 +16,8 @@ const userSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      unique: true,
+      unique: 'email already exist',
+      match: [ /. +\@. +\.. + /, 'Please give a valid email address' ]
     },
     user_type: {
       type: String,
