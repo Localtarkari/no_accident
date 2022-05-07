@@ -1,4 +1,9 @@
 const router = require("express").Router();
+
+/**
+ * Controller
+ */
+
 const {
   index,
   login,
@@ -9,13 +14,18 @@ const {
   profile,
   user,
   guides,
-  packages,
   apply_for_device,
   update_user_contact,
   update_profile,
   change_profile_pic
 } = require("../controller/usermanagement");
 
+const {add_user, get_user_form } = require('../controller/admin_controller')
+const { get_data,inqueries } = require("../controller/user_vehicle_data");
+
+/**
+ *  Middleware
+ */
 const { user_exist } = require("../middleware/find_user");
 const { check_sessions} = require("../middleware/check_session");
 const { check_access_sessions } = require("../middleware/check_access_session");
@@ -43,6 +53,7 @@ router.post("/", check_sessions, index);
 // router.get("/",(req,resp)=>{
 //   resp.render('vehicle_apply')
 // })
+
 router.get("/login", check_sessions, login);
 router.post("/login", check_sessions, authenticate_authorize);
 router.get("/signup", check_sessions, signup);
@@ -58,5 +69,12 @@ router.get("/profile",check_access_sessions,profile)
 router.post("/updateuser/:id",check_access_sessions,update_profile); //update user
 router.post("/updateuser/updatecontact/:id",check_access_sessions,update_user_contact); //update user address
 router.post('/upload/:id',check_access_sessions,upload.any('profile'),change_profile_pic);
+
+
+router.get("/add_user",check_access_sessions,user_exist,get_user_form);
+router.post("/admin/add_user",check_access_sessions,user_exist,add_user);
+
+router.get("/dashboard",check_access_sessions,get_data);
+router.get("/inqueries",check_access_sessions,inqueries)
 
 module.exports = router;

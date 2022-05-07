@@ -11,7 +11,7 @@ let index = (req, resp, next) => {
 
 
 let login = (req, resp, next) => {
-  resp.render("guest/login", { layout: "layouta" });
+  resp.render("guest/login", { layout: "layouta",err:'' });
 };
 
 
@@ -26,18 +26,18 @@ let logout = (req, resp, next) => {
 
 
 let authenticate_authorize = (req, resp, next) => {
-  User.findOne({ name: req.body.email }).then((user) => {
+  User.findOne({ email: req.body.email }).then((user) => {
     if (user) {
       user.validation(req.body.password.toString()).then((passwordMatch) => {
         if (passwordMatch) {
           req.session.user = user;
           resp.redirect("/");
         } else {
-          resp.send("incorrect password");
+          resp.render("guest/login", { layout: "layouta",err:'Incorrect Password' });
         }
       });
     } else {
-      resp.send("user doesnot exit");
+      resp.render("guest/login", { layout: "layouta",err:'Incorrect Details' });
     }
   });
 };
@@ -46,8 +46,7 @@ let signup = (req, resp, next) => {
   resp.render("guest/signup", { layout: "layouta", error: "" });
 };
 
-let register = (req, resp, next) => {
-  console.log(req.body)
+let register = (req, resp, next) => { 
   let newUser = new User({
     firstname: req.body.firstname,
     lastname: req.body.lastname,
@@ -99,8 +98,7 @@ let apply_for_device = (req, resp, next) => {
 let profile = (req, resp, next) => {
   User.findById(req.session.user["_id"])
     .then((user) => {
-      console.log(user.username)
-      resp.render("user/profile", { layout: "layoutb", user: user });
+       resp.render("user/profile", { layout: "layoutb", user: user });
     })
     .then((err) => {
       //have to handle error

@@ -6,6 +6,9 @@
                 
                 <div class="container-fluid">
                     <h3 class="text-dark mb-4">User Management</h3>
+                    <a class="btn-sm btn-primary" role="button" href="/add_user"><i class="fa fa-plus"
+                        style="padding: 6px;"></i> Add user
+                    </a>
                     <div class="row">
                         <div class="col">
                             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
@@ -13,10 +16,11 @@
                                     <thead>
                                         <tr>
                                             <th>Name</th>
-                                            <th>Vehicle</th>
+                                            <th>Access</th>
+                                            <th>Email</th>
                                             <th>Inquery</th>
-                                            <th>Report</th>
-                                            <th>Signed Up</th>
+                                            <th>Voilation</th>
+                                            <th>Time stamp</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
@@ -26,14 +30,15 @@
                                           
                                         <tr>
                                             
-                                            <td><img class="rounded-circle me-2" width="30" height="30" src="<%=`uploads/${(user.profile).toString()}`%>"><%=data[i].firstname %> <%=data[i].lastname %></td>
+                                            <td><img class="rounded-circle me-2" width="30" height="30" src="<%=`uploads/${(data[i].profile).toString()}`%>"><%=data[i].firstname %> <%=data[i].lastname %></td>
+                                            <td><%=data[i].user_type %></td>
                                             <td>BA NA 2002</td>
                                             <td>Tokyo</td>
                                             <td>33</td>
-                                            <td>2008/11/28</td>
+                                            <td><%=data[i].updatedAt%></td>
                                             <td><i class="fa fa-circle" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="bottom" style="color: rgb(26,254,6);" title="online"></i><i class="fa fa-circle" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="bottom" style="color: rgb(0,0,0);border-color: rgb(0,0,0);" title="offline"></i><i class="fa fa-circle" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="bottom" style="color: rgb(255,0,0);border-color: rgb(0,0,0);" title="error"></i></td>
                                             <td>
-                                                <a href="/#">
+                                                <a href="/dashboard">
                                                 <i class="fa fa-eye" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="bottom" style="color: rgb(255, 0, 0);" title="View Details"></i>
                                             </a>
                                         </tr>

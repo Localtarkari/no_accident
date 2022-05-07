@@ -3,6 +3,8 @@ const expressSession = require("express-session");
 const layouts = require('express-ejs-layouts');
 // const csrf = require('csurf');
 const app = express();
+const http = require('http');
+const server = http.createServer(app);
 
 const router = require("./routes/web");
 const router2 = require("./routes/package");
@@ -25,6 +27,8 @@ app.set('layoout','layouta','layoutb')
 //   })
   
 /** Working with session */
+
+
 app.use(
   expressSession({
     secret: "helloworld",
@@ -38,12 +42,16 @@ app.use(
 
 app.use("", router);
 app.use("/package", router2);
-app.listen(port, (err) => {
+
+
+
+server.listen(port, (err) => {
   if (err) {
     console.log("err", err);
   }
   console.log(`http://localhost:${port}`);
 });
+
 
 /**
  *  Database connection
@@ -60,3 +68,5 @@ let db = mongoose.connection;
 
 //Bind connection to error event (to get notification of connection errors)
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
+
+
