@@ -15,6 +15,11 @@ const userSchema = new mongoose.Schema(
       unique: 'required phonenumber',
 
     },
+    is_active:{
+      type: String,
+      enum:['active','inactive'],
+      default:'inactive',
+    },
     email: {
       type: String,
       unique: 'email already exist',

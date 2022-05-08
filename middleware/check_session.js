@@ -15,7 +15,6 @@ let check_sessions = (req, resp, next) => {
           });
   
         }
-        
 
 
       })

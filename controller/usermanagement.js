@@ -1,4 +1,8 @@
 const User = require("../database/models/user_management/users");
+const Inquery = require("../database/models/inquery/inquery");
+const { findByIdAndUpdate } = require("../database/models/user_management/users");
+const PackageRequest = require("../database/models/package/request_for_package");
+
 
 let index = (req, resp, next) => {
   // if (req.session.user) {
@@ -119,7 +123,6 @@ let update_profile = (req, resp, next) => {
 };
 
 let update_user_contact = (req, resp, next) => {
-
   User.findByIdAndUpdate(req.params.id, {
     address: req.body.address,
     country: req.body.country,
@@ -137,6 +140,67 @@ let update_user_contact = (req, resp, next) => {
       resp.redirect("/profile")})
   };
 
+  let renderer = (req,resp,next)=>{
+    resp.render("user/renderer",{ layout: "layoutc", user: req.session.user })
+  }
+
+  let guest_inqueries = (req,resp,next)=>{ //user inqueries
+     let newInquery =new  Inquery({
+        name: req.body.name,
+        email: req.body.email,
+        details: req.body.details,
+     })
+     newInquery.save((err,data)=>{
+       if(err){
+         console.log("inqieries error",err);
+        }
+        resp.redirect("/");
+     })
+  }
+
+  let view_inqueries = (req,resp,next)=>{
+     let inqueries = Inquery.find({},(err,data)=>{
+       console.log(data)
+       if(err){
+         console.log("inqueries",err)
+       }
+       resp.render('user/inqueries',{layout:'layoutb',user: req.session.user ,data: data})
+     
+     
+      })
+  }
+
+ let update_inquery_status = (req,resp,next)=>{
+   Inquery.findByIdAndUpdate({_id: req.params.id},(err,data)=>{
+    console.log("updated",data)
+    if(err){
+      console.log("inqueries",err)
+    }
+    resp.render('user/inqueries',{layout:'layoutb',user: req.session.user ,data: data})
+  
+   })
+ }
+
+
+ let verify_package = (req, resp, next) => {
+  PackageRequest.find({},(err,data)=>{
+    if (err) {
+      resp.render("user/package_verification.ejs", {
+        layout: "/layoutb",
+        user: req.session.user,
+        package: [],
+      });
+    } else {
+      console.log("package_verification",data);
+      resp.render("user/package_verification.ejs", {
+        layout: "layoutb",
+        user: req.session.user,
+        package: data,
+      });
+    }
+  })
+ }
+
 module.exports = {
   index,
   login,
@@ -146,11 +210,14 @@ module.exports = {
   logout,
   profile,
   user,
-  guides,
-  packages,
-  apply_for_device,
-  update_profile,
+  guides,  
   update_user_contact,
-  change_profile_pic
-
+  change_profile_pic,
+  renderer,
+  guest_inqueries,
+  view_inqueries,
+  update_profile,
+  apply_for_device,
+  update_inquery_status,
+verify_package
 };

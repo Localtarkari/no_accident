@@ -1,3 +1,4 @@
+
 const get_data = (req,resp,next)=>{
     return resp.render("user/dashboard", {
         layout: "layoutb",
@@ -13,7 +14,7 @@ const inqueries =(req,resp,next)=>{
 }
 
 const data = (req,resp,next)=>{
-    
+
 }
 
 module.exports = {

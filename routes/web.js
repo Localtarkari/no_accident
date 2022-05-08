@@ -17,7 +17,12 @@ const {
   apply_for_device,
   update_user_contact,
   update_profile,
-  change_profile_pic
+  change_profile_pic,
+  renderer,
+  guest_inqueries,
+  view_inqueries,
+  update_inquery_status,
+  verify_package
 } = require("../controller/usermanagement");
 
 const {add_user, get_user_form } = require('../controller/admin_controller')
@@ -75,6 +80,13 @@ router.get("/add_user",check_access_sessions,user_exist,get_user_form);
 router.post("/admin/add_user",check_access_sessions,user_exist,add_user);
 
 router.get("/dashboard",check_access_sessions,get_data);
-router.get("/inqueries",check_access_sessions,inqueries)
+
+router.get("/render",check_access_sessions,renderer);
+
+router.post("/contact", guest_inqueries);
+router.get("/inqueries",check_access_sessions,view_inqueries);
+router.get("/resolved/:id",check_access_sessions,update_inquery_status);
+
+router.get("/verifyPackage",check_access_sessions,verify_package);
 
 module.exports = router;
